@@ -2,7 +2,7 @@
 
 This application was developed as a part of INFM 743 - Development of Internet Applications course at University of Maryland, College Park. 
 
-Course Selector is developed in Python using the lightweight web framework, Flask. This application provides recommendation based on student's interests, courses taken previously, pre-requisites and availabilty.
+Course Selector is developed in Python using the lightweight web framework, Flask. This application provides recommendation based on student's interests, courses taken previously, pre-requisites and availability.
 
 
 ##Developed by
