@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../static/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/tabs.css" />
+    <link type="text/css" rel="stylesheet" href="../static/css/jquery.ratings.css" />
+    <script src="../static/js/jquery-1.3.2.min.js"></script>
+    <script src="../static/js/jquery.ratings.js"></script>
+
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <script type="text/javascript">
+
+
+        $(document).ready(function() {
+            var list = document.getElementsByTagName("tr");
+            var num = list.length;
+
+            for(var i=1;i<num;i++){
+
+                list[i].setAttribute("id","tr"+i);
+            }
+            for(var x=1;x<(num);x++) {
+                console.log(x)
+                z = 1;
+                $('#tr'+x).each(function() {
+                    $(this).find('#example-2').ratings(5).bind('ratingchanged', function (event, data) {
+                      console.log(data.rating)
+                      $('#tr'+z).find('#example-rating-2').text(data.rating);
+                      z++
+
+                    });
+                });
+
+            }
+        });
+
+    </script>
+
+</head>
+<body>
+
+<div class="codrops-top">
+    <div style="text-align: right;padding-right: 10px;"><label id="username">{{username|safe}}</label>
+        <a href="{{url_for('logout',filename='index.html')}}">Logout </a>
+
+    </div>
+</div>
+<div class="container">
+    <header >
+        <h1> <strong>Course Selector</strong></h1>
+        <h2>A tool to help you select your courses</h2>
+    </header>
+</div>
+
+<!--<div class="tabs">-->
+
+<form class="register" style="overflow-y:auto;height: 500px">
+
+    <ul class="tab-links">
+
+                            <li><a href="{{url_for('home')}}" >Home</a></li>
+        <li class="active"><a href="{{url_for('feedback')}}">Feedback</a></li>
+        <li><a href="{{url_for('planner')}}">Our Recommendation</a></li>
+        </ul>
+
+
+        <div class="tab-content">
+            <div id="home" class="tab active">
+
+<fieldset class="row2">
+
+    <div class ="CSSTableGenerator">
+            <table>
+
+
+                <tr><td>Courses Name</td>
+                    <td>Rating</td>
+                </tr>
+
+                {% for course in courses %}
+                <tr><td>{{course.name|safe}}</td>
+
+                    <td>
+
+                        <div id="example-2"></div> <br />
+                            Your Rating: <span id="example-rating-2">not set</span>
+
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
+    </fieldset>
+   </div>
+            <div style="padding-left:300px;" ><input  type="submit" value="Submit" onclick="location.reload()"></div>
+            </div>
+
+
+</form>
+
+
+
+</body>
+</html>

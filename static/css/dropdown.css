@@ -1,0 +1,85 @@
+/******************************DROP-DOWN*******************************  #FF6633   *****/
+
+.dropdown {
+    width: 200px;
+    border: 1px solid #a19da1;
+    background-color: #fdffff;
+    cursor: pointer; /* use correct mouse pointer when hovering over the dropdown */
+    padding: 10px;
+    position: relative;
+    margin: 0 auto;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Display CSS arrow to the right of the dropdown text */
+.dropdown:after {
+    content:'';
+    height: 0;
+    position: absolute;
+    width: 0;
+    border: 6px solid #fdffff;
+    border-top-color: #000;
+    background-color: #fdffff;
+    top: 50%;
+    right: 10px;
+    margin-top: -3px;
+}
+
+/* Reverse the CSS arrow when the dropdown is active */
+.dropdown.is-active:after {
+    border-bottom-color: #a19da1;
+    border-top-color: #fff;
+    margin-top: -9px;
+    background-color: #fdffff;
+}
+
+.dropdown-list {
+    background-color: #fdffff;
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    position: absolute;
+    height: 50px;
+    overflow-y: auto;
+    top: 100%; /* align the dropdown right below the dropdown text */
+    border: inherit;
+    border-top: none;
+    left: -1px; /* align the dropdown to the left */
+    right: -1px; /* align the dropdown to the right */
+    opacity: 0; /* hide the dropdown */
+    -webkit-transition: opacity 0.4s ease-in-out;
+    -moz-transition: opacity 0.4s ease-in-out;
+    -o-transition: opacity 0.4s ease-in-out;
+    -ms-transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
+    pointer-events: none; /* avoid mouse click events inside the dropdown */
+}
+
+.is-active .dropdown-list {
+    opacity: 1; /* display the dropdown */
+    pointer-events: auto; /* make sure that the user still can select checkboxes */
+}
+
+.dropdown-list li label {
+    display: block;
+    border-bottom: 1px solid #a19da1;
+    padding: 10px;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+.dropdown-list li label:hover {
+    background-color: #fffffb;
+    color: white;
+}
+
+
+

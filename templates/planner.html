@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../static/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/tabs.css" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+    <style>
+        ::-webkit-input-placeholder { font-size: 11px;text-align: center }
+        ::-moz-placeholder { font-size: 11px;text-align: center  } /* firefox 19+ */
+        :-ms-input-placeholder { font-size: 11px; text-align: center } /* ie */
+        input:-moz-placeholder { font-size: 11px;text-align: center  }
+    </style> 
+
+	 <script src="../static/js/media/js/jquery.js"></script>
+    <script src="../static/js/media/js/jquery.dataTables.js"></script>
+    <script src="../static/js/media/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/jquery.dataTables.css"/>
+
+
+</head>
+<body>
+
+<div class="codrops-top">
+    <div style="text-align: right;padding-right: 10px;">
+    	<label id="username">{{username|safe}}</label>
+        <a href="{{url_for('logout',filename='index.html')}}">Logout </a>
+
+    </div>
+</div>
+
+<div class="container">
+    <header >
+        <h1> <strong>Course Selector</strong></h1>
+        <h2>A tool to help you select your courses</h2>
+    </header>
+</div>
+
+<!--<div class="tabs">-->
+
+<form class="register" style="overflow-y:auto;height: 800px">
+
+    <ul class="tab-links">
+        <li><a href="{{url_for('home')}}" >Home</a></li>
+        <li><a href="{{url_for('feedback')}}">Feedback</a></li>
+        <li class="active"><a href="{{url_for('planner')}}">Our Recommendation</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab active">
+
+            <fieldset class="row2" style="height: 400px">
+                <legend>Based on Interests
+                </legend>
+                <div>
+
+                    <table id="courseTable1">
+
+                        <thead>
+                        <tr><td>Course Name</td>
+                            <td>Description</td>	
+                            <td>Pre-requisite</td>
+                            <td>Pre-req Taken?</td>
+                            <td>Credits</td>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for course in courses %}
+                        <tr><td>{{course.name|safe}}</td>
+                            <td>{{course.desc|safe}}</td>
+                            <td>{{course.prereq|safe}}</td>
+
+                            <td>{{course.taken|safe}}</td>
+
+                            <td>{{course.credits|safe}}</td>
+                        </tr>
+                       
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                 </fieldset>
+            <p>
+        <input type="button" onclick="myFunction2()" value="Show Graph"></p>
+            <fieldset class="row2">
+                <legend>Based on courses taken
+                </legend>
+                <div class>
+
+                    <table id="courseTable2">
+
+
+
+                        <thead>
+                        </tr>
+                        <tr><td>Course Name</td>
+                            <td>Description</td>
+                            <td>Pre-requisite</td>
+                            <td>Pre-req Taken?</td>
+                            <td>Credits</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for course in courserecotwo %}
+                        <tr><td>{{course.name|safe}}</td>
+                            <td>{{course.desc|safe}}</td>
+                            <td>{{course.prereq|safe}}</td>
+                            <td>{{course.taken|safe}}</td>
+                            <td>{{course.credits|safe}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+        <p>
+        <input type="button" onclick="myFunction()" value="Show Graph"></p>
+    </div>
+</form>
+
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#courseTable1').DataTable({
+        "searching" : false,
+        "lengthChange": false,
+        "pageLength": 3,
+        "language": {
+            "emptyTable": "Oops!Looks like we couldn't find courses that matched your interests. However, do take a look at our recommedation based on courses taken"
+                                              }
+
+                                              
+    })
+    jQuery('#courseTable2').DataTable({
+        "searching" : false,
+        "lengthChange": false,
+                                              "pageLength": 3
+
+                                              
+
+    })
+    } );
+
+</script>
+
+<script >
+function myFunction() {
+      window.open("/barchartInterest")
+}
+function myFunction2() {
+    window.open("/barchartCourses")
+   }
+</script>
